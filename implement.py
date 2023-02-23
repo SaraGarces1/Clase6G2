@@ -1,3 +1,5 @@
+#fecha
+import datetime
 from sistemaVet import *
 
 def main():
@@ -13,34 +15,61 @@ def main():
                        \nUsted ingresó la opción: ''' ))
 
         if menu == 1:
-            if servicio_hospitalario.verNumeroMascotas() >= 10:
+            if servicio_hospitalario.verNumeroFelinos () >= 7:
                 print("No hay espacio dispnible...")
-                continue
-            historia = int(input(" ingrese la historia clinica de la mascota: "))
-            if servicio_hospitalario.verificarExiste(historia) == False:
-                nombre=input("Ingrese el nombre de la mascota: ")
-                tipo=input("Ingrese el tipo de mascota (felino o canino): ")
-                peso=int(input("Ingrese el peso de la mascota: "))
-                fecha=input("Ingrese la fecha de ingreso (dia/mes/año): ")
-                medicamento=Medicamento()
-                medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
-                medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
-                mas = Mascota()
-                mas.asignarNombre(nombre)
-                mas.asignarHistoria(historia)
-                mas.asignarPeso(peso)
-                mas.asignarTipo(tipo)
-                mas.asignarFecha(fecha)
-                mas.asignarMedicamento(medicamento)
-                servicio_hospitalario.ingresarMascota(mas)
 
+            elif servicio_hospitalario.verNumeroCaninos() >= 7:
+                print("No hay espacio dispnible...")
+
+                continue
+            tipo= input("Ingresar 1 si es Felino o 2 si es Canino:  ")
+            historia = int(input(" ingrese la historia clinica de la mascota: "))
+
+            if tipo == "1":
+                if servicio_hospitalario.verificarExiste(historia) == False:
+                    nombre=input("Ingrese el nombre del felino: ")
+                    peso=int(input("Ingrese el peso del felino: "))
+                    fecha= datetime.datetime(2023,2,23)
+                    print(fecha.strftime("%x"))
+                    medicamento=Medicamento()
+                    medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
+                    medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
+                    mas = Mascota()
+                    mas.asignarNombre(nombre)
+                    mas.asignarHistoria(historia)
+                    mas.asignarPeso(peso)
+                    mas.asignarTipo(tipo)
+                    mas.asignarFecha(fecha)
+                    mas.asignarMedicamento(medicamento)
+                    servicio_hospitalario.ingresarFelino(mas)
+
+                else:
+                    print("Ya existe una mascota con el numero de historia clínica ingresado.") 
             else:
-                print("Ya existe una mascota con el numero de historia clínica ingresado.") 
+                if servicio_hospitalario.verificarExiste(historia) == False:
+                    nombre=input("Ingrese el nombre del canino: ")
+                    peso=int(input("Ingrese el peso del canino: "))
+                    fecha= datetime.datetime(2023,2,23)
+                    print(fecha.strftime("%x"))
+                    medicamento=Medicamento()
+                    medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
+                    medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
+                    mas = Mascota()
+                    mas.asignarNombre(nombre)
+                    mas.asignarHistoria(historia)
+                    mas.asignarPeso(peso)
+                    mas.asignarTipo(tipo)
+                    mas.asignarFecha(fecha)
+                    mas.asignarMedicamento(medicamento)
+                    servicio_hospitalario.ingresarCanino(mas)
+
+                else:
+                    print("Ya existe una mascota con el numero de historia clínica ingresado.")                 
 
             
         elif menu==2: # Ver fecha de ingreso
             q = int(input("Ingrese la historia clínica de la mascota: "))
-            fecha = servicio_hospitalario.verFechaIngreso(q)
+            fecha = servicio_hospitalario.verFechaIngresoFelino(q)
             if fecha != None:  
                 print("La fecha de ingreso de la mascota es: " + fecha)
             else:
